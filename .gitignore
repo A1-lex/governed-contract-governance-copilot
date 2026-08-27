@@ -1,0 +1,10 @@
+# local scratch
+*.tmp
+indexer.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
