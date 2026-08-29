@@ -183,3 +183,66 @@ citing `Contract Renewal and Termination Policy.pdf` — a document that was nev
 manually uploaded to the agent.
 
 **Status:** Applied and validated.
+
+## Decision 013: Foundry IQ MCP integration validated independently
+
+### Context
+
+The project brief required Azure Blob Storage, Azure AI Search, Foundry IQ, MCP-based
+retrieval, and Azure AI Foundry model deployment.
+
+### Implementation
+
+The following architecture was implemented and validated:
+
+Blob Storage
+→ Azure AI Search
+→ Foundry IQ Knowledge Base
+→ MCP Retrieval
+→ Grounded answer with citations
+
+The Foundry IQ knowledge base successfully retrieved information from the indexed
+governance documents and returned source-attributed answers in the Foundry playground.
+
+### Validation
+
+The following components were verified:
+
+- Azure Blob Storage container populated with governance documents.
+- Azure AI Search index created and populated.
+- Hourly incremental indexer configured and executed successfully.
+- Foundry IQ Knowledge Base created and active.
+- MCP retrieval operational within Foundry.
+- Azure AI Foundry model deployment created successfully.
+
+### Limitation Identified
+
+Copilot Studio successfully:
+
+- created the Foundry IQ connection,
+- discovered the knowledge base,
+- surfaced the `knowledge_base_retrieve` operation,
+- accepted API-key and Microsoft Entra-based connections.
+
+However, at runtime Copilot Studio reported missing search tools and unavailable
+retrieval capabilities despite successful discovery and configuration.
+
+An additional direct MCP server onboarding attempt using the Foundry IQ MCP endpoint
+also failed during tool creation.
+
+### Outcome
+
+The Foundry IQ retrieval layer was validated independently in Foundry.
+
+SharePoint remained the operational knowledge source for the Copilot Studio Teams
+experience while the Foundry IQ implementation remained available for demonstration
+and future integration testing.
+
+### Rationale
+
+The objective of the prototype was to validate enterprise retrieval grounded in
+governance content.
+
+That objective was achieved through Foundry IQ and MCP retrieval, even though the
+final Copilot Studio runtime integration exhibited tool-discovery limitations in
+this environment.
