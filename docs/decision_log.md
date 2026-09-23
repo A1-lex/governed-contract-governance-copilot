@@ -246,3 +246,27 @@ governance content.
 That objective was achieved through Foundry IQ and MCP retrieval, even though the
 final Copilot Studio runtime integration exhibited tool-discovery limitations in
 this environment.
+
+## Decision 014: Azure AI Search integrates as a Tool, not a Knowledge source
+
+Verified in a Dataverse-backed managed environment that Copilot Studio exposes
+Azure AI Search under Tools rather than Knowledge. The Advanced Knowledge tab
+lists no Azure AI Search or Foundry IQ option.
+
+This supersedes the earlier assumption that the Default environment was the
+constraint. The correct integration path is Build, then Tools, then Azure AI
+Search, then Agentic Search.
+
+Knowledge sources in Copilot Studio cover document-style repositories such as
+SharePoint, OneDrive and uploaded files. Index-backed retrieval is a tool
+invocation.
+
+## Decision 015: Agentic Search connector cannot consume knowledge-source-backed
+knowledge bases
+
+The Copilot Studio Azure AI Search connector calls the search service on an API
+version earlier than 2025-08-01-preview. Knowledge bases defined with knowledge
+sources are rejected with HTTP 400.
+
+Retrieval against the underlying index succeeds. The limitation is in the
+connector's API version, not in the search service, index or permissions.
